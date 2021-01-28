@@ -1,0 +1,88 @@
+{% extends 'std_base.html' %}
+
+
+{% block content %}
+<nav class="navbar navbar-dark bg-dark p-2">
+    <div class="container-fluid">
+        <p class="text-light nomargin pe-3" style="border-right: 1px solid rgb(187, 166, 166);">
+            <a href="#"><i class="fas fa-arrow-up" style="font-size:22px;"></i></a>
+            <span class="ms-2 me-2" style="font-weight: 600; font-size: 18px;">556</span>
+            <a href="#"><i class="fas fa-arrow-down" style="font-size:22px;"></i></a>
+        </p>
+        <p class="text-white nomargin me-5">
+            Unpopular opinion: IBA is not the most prestigious institute.
+            <a href="#"></a>
+        </p>
+    </div>
+</nav>
+<div class="row">
+    <div class="col-8">
+        <!-- {% include 'components/post.html' %} -->
+        <div class="card ps-2 mt-4 pb-3 border-0">
+            <div class="row">
+                <div class="col-1 ml-1">
+                    <p class="text-right  mt-2" style="font-size:18px;">
+                        <a class="upvote p-1 m-1" href="#">
+                            <i class="fas fa-arrow-up" style="font-size:22px;"></i>
+                        </a>
+                        <span class="ml-1" style="font-weight: 600; font-size: 18px;">556</span>
+                        <br>
+                        <a href="#" class="downvote p-1 m-1" style="font-size:22px;">
+                            <i class="fas fa-arrow-down"></i>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-11">
+                    <p class="mt-2 mb-1" style="font-size: 14px;">
+                        <i class="fas fa-smile-wink text-info"></i>
+                        <a href="#" class="text-danger" style="text-decoration: none;">
+                            <b>AwesomeTopic</b>
+                        </a>
+                        - Posted by
+                        <a href="#" class="text-danger">
+                            Mashood
+                        </a>
+                        10 hours ago
+                    </p>
+                    <h5>
+                        Clearest view of IBA students jerking off their instructors and still being called leaders of tomorrow
+                        <span class="badge bg-secondary text-dark" style="font-weight: 400; font-size: 14px;">Unacceptable</span>
+                        <img class="mt-2" src="https://propakistani.pk/wp-content/uploads/2020/05/IBA-Karachi-feature.jpg" style="width:100%;">
+                    </h5>
+                    <p class="nomargin" style="font-size:14px;">
+                        <a class="backchange p-1" style="text-decoration: none;">
+                            <i class="fas fa-comment"></i>
+                            13 Comments
+                        </a>
+                        <a class="backchange p-1" style="text-decoration: none;">
+                            <i class="fas fa-plus"></i>
+                            Save
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <!--Comments Portion-->
+            {% include 'components/comment.html' %}
+            {% include 'components/comment.html' with content='You suck you motherfuck' %}
+            
+            <div class="d-grid mt-3 ms-3 me-3">
+                <button class="btn btn-danger btn-sm iround" type="button">View entire discussion (13 comments)</button>
+              </div>
+        </div>
+        {% include 'components/post.html' %}
+        {% include 'components/post.html' %}
+
+    </div>
+    <div class="col-4">
+        <div class="card border-0 mt-4 p-2">
+            <h5>
+            <img src="https://media.idownloadblog.com/wp-content/uploads/2018/07/Apple-logo-black-and-white.png" style="width: 50px;">
+            Politics</h5>
+            <p class="nomargin">Politics is for news and  discussion about US politics</p>
+            <hr/>
+            Created January 8, 2020
+        </div>
+        {% include 'components/footer.html' %}
+    </div>
+</div>
+{% endblock content %}

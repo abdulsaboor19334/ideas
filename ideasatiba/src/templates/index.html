@@ -1,0 +1,152 @@
+{% extends 'std_base.html' %} {% block content %}
+
+{% if featured %}
+<p class="mt-3" style="margin: 5px">Trending Today</p>
+<div class="row">
+  {% for post in featured %}
+  <div class="col">
+    {% include 'components/trend_card.html' %}
+  </div>
+  {% endfor %}
+</div>
+
+{% endif %}
+<p class="mt-3" style="margin: 5px">Popular Posts</p>
+<div class="row">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-body">
+        <button class="btn btn-danger iround">
+          <i class="fas fa-fire-alt me-2"></i>
+          Hot
+        </button>
+        <button class="btn btn-danger iround">
+          <i class="far fa-sun me-2"></i>
+          New
+        </button>
+        <button class="btn btn-danger iround">
+          <i class="fas fa-chart-line me-2"></i>
+          Top
+        </button>
+      </div>
+    </div>
+    {% for post in posts %} {% include 'components/post.html' %} {% endfor %}
+  </div>
+  <div class="col-4">
+    <div class="card border-0">
+      <div class="card-header text-primary border-0" style="
+          background: linear-gradient(to right, #21cc99, #20b4d1);
+          font-size: 20px;
+          font-weight: 300;
+        ">
+        <div class="row">
+          <div class="col-3">
+            <i class="fas fa-smile-wink text-white mt-2" style="font-size: 50px"></i>
+          </div>
+          <div class="col-9">Trending communities right now</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-auto">
+            <i class="fas fa-exclamation-triangle mt-2" style="font-size: 30px"></i>
+          </div>
+          <div class="col">
+            <a href="#" class="ilink nomargin">Issues</a>
+            <p class="" style="font-size: 10px">872 Members</p>
+          </div>
+          <div class="col">
+            <button class="btn btn-info iround btn-sm" style="width: 100%">
+              Join
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-auto">
+            <i class="fas fa-exclamation-triangle mt-2" style="font-size: 30px"></i>
+          </div>
+          <div class="col">
+            <a href="#" class="ilink nomargin">Issues</a>
+            <p class="" style="font-size: 10px">872 Members</p>
+          </div>
+          <div class="col">
+            <button class="btn btn-info iround btn-sm" style="width: 100%">
+              Join
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-auto">
+            <i class="fas fa-exclamation-triangle mt-2" style="font-size: 30px"></i>
+          </div>
+          <div class="col">
+            <a href="#" class="ilink nomargin">Issues</a>
+            <p class="" style="font-size: 10px">872 Members</p>
+          </div>
+          <div class="col">
+            <button class="btn btn-info iround btn-sm" style="width: 100%">
+              Join
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-auto">
+            <i class="fas fa-exclamation-triangle mt-2" style="font-size: 30px"></i>
+          </div>
+          <div class="col">
+            <a href="#" class="ilink nomargin">Issues</a>
+            <p class="" style="font-size: 10px">872 Members</p>
+          </div>
+          <div class="col">
+            <button class="btn btn-info iround btn-sm" style="width: 100%">
+              Join
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card border-0 mt-3">
+      <div class="card-header text-primary border-0" style="
+          background: linear-gradient(to right, #21cc99, #20b4d1);
+          font-size: 20px;
+          font-weight: 300;
+        ">
+        <div class="row">
+          <div class="col-3">
+            <i class="fas fa-smile-wink text-white mt-2" style="font-size: 20px"></i>
+          </div>
+          <div class="col-9">Top Teachers</div>
+        </div>
+      </div>
+      <div class="card-body">
+        {% comment %} have to add for loop for best teacher {% endcomment %}
+        {% for inst in instructor  %}
+        <div class="row">
+          <div class="col-auto">
+            <!-- fix the image -->
+            <img src="{{inst.image.url}}" style=" border-radius: 50%;height:50px;width:50px;">
+          </div>
+          <div class="col"> 
+            <a href="#" class="ilink nomargin" style="font-size: 14px">{{inst.name}}</a>
+            <p style="font-size:13px">({{inst.nickname}})</p>
+            <p class="" style="font-size: 10px">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </p>
+          </div>
+          <div class="col">
+            <button class="btn btn-info iround btn-sm" style="width: 100%">
+              View
+            </button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% include 'components/footer.html' %}
+  </div>
+</div>
+{% endblock %}
