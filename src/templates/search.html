@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block standard %}
+<nav class="navbar navbar-light bg-light">
+    <p class="ms-5 nomargin lead">
+        {{query}}
+        <span style="font-size: 12px">Search Results</span>
+    </p>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10">
+            {% if instructors or posts %}
+            {% if instructors %}
+            <div class="card m-4 p-2 border-0">
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <p class="nomargin" style="font-size: 13px;">
+                            Instructor Name
+                        </p>
+                    </div>
+                    <div class="col-3">
+                        <p class="nomargin" style="font-size: 13px;">
+                            Designation
+                        </p>
+                    </div>
+                    <div class="col-3">
+                        <p class="nomargin" style="font-size: 13px;">
+                            Rating
+                        </p>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <hr class="mt-2 mb-2">
+                {% for inst in instructors %}
+                <div class="row mb-2">
+                    <!-- <div class="col-auto">
+                    <img src="{{inst.image.url}}" class="" style="width: 50px; border-radius: 50%; height: 50px; object-fit: cover;">
+                </div> -->
+                    <div class="col-3">
+                        <p class="nomargin" style="font-size: 18px;">
+                            <img src="{{inst.image.url}}" class="" style="width: 30px; border-radius: 50%; height: 30px; object-fit: cover;">
+                            {{inst.name}}
+                        </p>
+                    </div>
+                    <div class="col-3">
+                        <p class="nomargin" style="font-size: 18px;">
+                            {{inst.designation}}
+                        </p>
+                    </div>
+                    <div class="col-3">
+                        <p class="nomargin">
+                            {% include 'components/rating.html' with rating=inst.instructor_rating font_size=19 %}
+                        </p>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-danger btn-sm iround" href="{% url 'single' inst.id %}" style="width: 100%">View Details</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if posts %}
+            <div class="card m-4 p-2 border-0">
+                {% for post in posts %}
+                <div class="row">
+                    <div class="col-auto">
+                        <img src="{{post.image.url}}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%">
+                    </div>
+                    <div class="col-10">
+                        <a href="{% url 'post' post.id %}" class="text-dark" style="text-decoration: none">
+                            <p class="nomargin">
+                                {{post.title}}
+                            </p>
+                        </a>
+                        <p class="nomargin" style="font-size: 12px; font-weight: 400;">
+                            {{post.topic}}
+                            <span style="font-weight: 300;">
+                                Posted by 
+                                {% if post.anonymous %}
+                Anonymous
+                {% else %}
+                                <a href="#" class="text-danger">
+                                    {{post.user.username}}
+                                </a>
+                                {% endif %}
+                            </span> {{post.timestamp|timesince|date}}
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <hr class="m-1">
+            {% endfor %}
+
+        {% endif %}
+        </div>
+    </div>
+    {% else %}
+    <div class="card border-0">
+        <p>No search results found :(</p>
+    </div>
+    {% endif %}
+    <div class="col-2">
+        <div class="mt-4 mb-3 me-3">
+            <!-- {% include 'components/footer.html' %} --></div>
+    </div>
+</div>
+</div>
+{% endblock %}

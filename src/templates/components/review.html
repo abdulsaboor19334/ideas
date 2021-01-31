@@ -1,0 +1,27 @@
+<div class="mt-3 ps-4 ms-3 pe-2" style="border-left: 1px solid rgba(0,0,0,0.5)">
+    <p class="nomargin" style="font-size:14px; font-weight: 600">
+        {{reviewer}}
+        {% if time %}
+        <span class="ms-1" style="font-size: 12px; font-weight: 200;">{{time|timesince}}</span>
+        {% endif %}
+    </p>
+    <p class="nomargin" style="font-size: 16px;">
+        {% if review %}
+        {{ review }}
+        {% else %}
+        No Text
+        {% endif %}
+    </p>
+    <p class="nomargin p-2" style="font-size:14px;">
+        <a class="upvote p-1" href="#" style="font-size:22px;"><i class="fas fa-arrow-up"></i></a>
+        <a href="#" class="downvote p-1" style="font-size:22px;"><i class="fas fa-arrow-down"></i></a>
+        <!-- <a class="backchange p-1" style="text-decoration: none;">
+            <i class="fas fa-comment"></i>
+            13 Comments
+        </a>
+        <a class="backchange p-1" style="text-decoration: none;">
+            <i class="fas fa-plus"></i>
+            Save
+        </a> -->
+    </p>
+</div>

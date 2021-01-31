@@ -1,0 +1,38 @@
+{% extends 'std_base.html' %}
+
+
+{% block content %}
+<nav class="navbar navbar-dark bg-dark p-2">
+    <div class="container-fluid">
+        <p class="text-light nomargin pe-3" style="border-right: 1px solid rgb(187, 166, 166);">
+            <a href="#"><i class="fas fa-arrow-up" style="font-size:22px;"></i></a>
+            <span class="ms-2 me-2" style="font-weight: 600; font-size: 18px;">{{post.get_vote_difference}}</span>
+            <a href="#"><i class="fas fa-arrow-down" style="font-size:22px;"></i></a>
+        </p>
+        <p class="text-white nomargin me-5">
+            {{post.title}}
+            <a href="#"></a>
+        </p>
+    </div>
+</nav>
+<div class="row">
+    <div class="col-8">
+        <!-- {% include 'components/post.html' %} -->
+       
+        {% include 'components/single_post.html' with post=post %}
+
+
+    </div>
+    <div class="col-4">
+        <div class="card border-0 mt-4 p-2">
+            <h5>
+            <img src="https://media.idownloadblog.com/wp-content/uploads/2018/07/Apple-logo-black-and-white.png" style="width: 50px;">
+            Politics</h5>
+            <p class="nomargin">Politics is for news and  discussion about US politics</p>
+            <hr/>
+            Created January 8, 2020
+        </div>
+        {% include 'components/footer.html' %}
+    </div>
+</div>
+{% endblock content %}

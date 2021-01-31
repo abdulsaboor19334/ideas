@@ -1,0 +1,62 @@
+{% extends 'std_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+    <form method="get">
+        <!-- {{filter.form}} -->
+            <div class="card p-3 iround mt-3 border-0">
+        <div class="row">
+            <div class="col-1">
+
+            </div>
+                <div class="col-4">
+                    <label for="department">Departments</label>
+                <select name='department' class="form-control">
+                    <option selected>Select Department</option>
+                    {% for department in departments %}
+                    <option value="{{department.id}}">{{department.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-4">
+                    <label for="courses_taught">Courses</label>
+                <select name='courses_taught' class="form-control">
+                    <option selected>Select Course</option>
+                    {% for course in courses %}
+                    <option value="{{course.id}}">{{course.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-danger mt-4">Search</button>
+            </div>
+            </div>
+        </div>
+    </form>
+    {% for instructor in filter.qs %}
+
+<div class="col-lg-4 col-md-12">
+    <div class="card mt-3 iround border-0">
+        <a href="{% url 'single' instructor.id %}">
+            <img src="{{instructor.image.url}}" class="card-img-top iround-top" style="height: 200px; object-fit: cover;" alt="{{instructor.name}}'s image">
+        </a>
+        <div class="card-body">
+            <a href="{% url 'single' instructor.id %}">
+                <h5 class="card-title text-dark" style="margin: 0; text-decoration: none;">{{instructor.name}}</h5>
+            </a>
+          <p style="margin: 0;">{{instructor.designation}}</p>
+            {% include 'components/rating.html' with rating=instructor.instructor_rating font_size=20 text='text' %}
+          <a href="{% url 'single' instructor.id %}" class="btn btn-danger iround">Details & Reviews</a>
+        </div>
+      </div>
+</div>
+    
+    {% empty %}
+    <p>No Instructors matching criteria</p>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

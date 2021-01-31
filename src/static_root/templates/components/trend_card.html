@@ -1,0 +1,13 @@
+{% load static %}
+<div class="card bg-dark text-white iround border-0 shadow" style="max-height: 250px;">
+  {% if post.image %}
+    <img src="{{post.image.url}}" class="card-img iround" alt="..." style="max-height: 250px; height: 250px; object-fit cover:">
+  {% else %}
+    <img src="{% static 'test.jpg' %}" class="card-img iround" alt="..." style="max-height: 250px; height: 250px; object-fit cover:">
+  {% endif %}
+    <div class="card-img-overlay iround" style="background-image: linear-gradient(to top, black, rgba(0,0,0,0));">
+        <h5 class="card-title mt-5" style="margin:0;">Card title</h5>
+      <p class="card-text">{{post.body|truncatechars:40}}</p>
+      <p class="card-text">Last updated 3 mins ago</p>
+    </div>
+  </div>
