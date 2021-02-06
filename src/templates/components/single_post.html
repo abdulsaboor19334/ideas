@@ -34,7 +34,7 @@
                     {{post.user.username}}
                 </a>
                 {% endif %}
-                - {{post.timestamp|timesince}} ago
+                - {{ post.timestamp|timesince }} ago
             </p>
             <h5>
                 {{post.title}}
@@ -44,7 +44,7 @@
             <p class="nomargin" style="font-size:14px;">
                 <a class="backchange p-1" style="text-decoration: none;">
                     <i class="fas fa-comment"></i>
-                    13 Comments
+                    {{comments.all.count}}
                 </a>
                 <a class="backchange p-1" style="text-decoration: none;">
                     <i class="fas fa-plus"></i>
@@ -54,8 +54,14 @@
         </div>
     </div>
     <!--Comments Portion-->
-    {% include 'components/comment.html' %}
-    {% include 'components/comment.html' with content='You suck you motherfuck' %}
+    {% for comment in comments %}
+        {% include 'components/comment.html' with content=comment.body %}
+        {% for sub_comment in comment.sub_comments_set.all %}
+            {% include 'components/comment.html'  %}
+        {% endfor %}
+    {% endfor %}
+    
+    
     
     <div class="d-grid mt-3 ms-3 me-3">
         <button class="btn btn-danger btn-sm iround" type="button">View entire discussion (13 comments)</button>

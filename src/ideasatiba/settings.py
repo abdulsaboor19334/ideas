@@ -24,17 +24,23 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
 
     # 3rd party
     'django_starfield',
     'crispy_forms',
     'django_filters',
+    'django.contrib.messages',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+   
     
     # Own
     'pages',
-    'instructors'
+    'instructors',
+    'users'
 
 ]
 
@@ -124,3 +130,30 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# allauth
+AUTHENTICATION_BACKENDS = [
+
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
+
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
+AUTH_USER_MODEL = 'users.User'
+SITE_ID = 1
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email' 
+ACCOUNT_EMAIL_REQUIRED = True
+
+# Make email verification mandatory to avoid junk email accounts
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+#  Email Host
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "fluffcoding@gmail.com"
+EMAIL_HOST_PASSWORD = "PandaSaboor"

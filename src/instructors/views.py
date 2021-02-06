@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Instructors,Reviews, Departments, Courses
 
 from .forms import ReviewForm
-
+from django.contrib.auth.decorators import login_required
 import django_filters
 
 class InstructorFilter(django_filters.FilterSet):
@@ -13,7 +13,7 @@ class InstructorFilter(django_filters.FilterSet):
         fields = ['department', 'courses_taught', ]
 
 # instructors
-
+@login_required
 def all_instructors(request):
     departments = Departments.objects.all()
     courses = Courses.objects.all
@@ -27,7 +27,7 @@ def all_instructors(request):
     }
     return render(request,'instructor/all.html',context)
 
-
+@login_required
 def single_instructor(request, id):
     instructor = Instructors.objects.get(pk=id)
     check_review = Reviews.objects.filter(user=request.user, instructor=instructor).first()
@@ -63,7 +63,7 @@ def single_instructor(request, id):
 
 
 
-
+@login_required
 def review(request,id):
     if request.method == 'POST':
         instructor = Instructors.objects.get(pk=id)

@@ -6,8 +6,9 @@ from instructors.models import Instructors
 from .forms import PostsForm
 
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def front_page(request):
     form = PostsForm(request.POST or None)
     if request.method == 'POST':
@@ -32,11 +33,13 @@ def front_page(request):
     }
     return render(request, 'index.html', context)
 
-
+@login_required
 def post_page(request, id):
     post = Posts.objects.get(id=id)
+    comments = Comments.objects.filter(post=post).order_by('-vote_count')
     context = {
         'post': post,
+        'comments' : comments
     }
     return render(request, 'post_page.html', context)
 
@@ -44,7 +47,7 @@ def post_page(request, id):
 # def search_results(request):
 #     return render(request, 'search.html', {})
 
-
+@login_required
 def vote(request):
     if request.method == 'POST':
         upvotes = request.POST.get('upvote_id')
@@ -100,8 +103,66 @@ def vote(request):
                 vote = Vote.objects.get(id=create_or_get_downvote[0].id)
                 vote.delete()
     return redirect('post', post.id)
+@login_required
+def comment_vote(request):
+    if request.method == 'POST':
+        upvotes = request.POST.get('upvote_id')
+        downvotes = request.POST.get('downvote_id')
+        post = request.POST.get('post')
+        if upvotes:
+            comment = Comments.objects.get(pk=upvotes)            
+            check_downvote = Vote.objects.filter(
+                voter=request.user,
+                comment=comment,
+                vote_type=0
+            )
+            if check_downvote:
+                # change to upvote
+                the_downvote = Vote.objects.get(
+                voter=request.user,
+                comment=comment,
+                vote_type=0
+                )
+                the_downvote.vote_type = 1
+                the_downvote.save()
+                return redirect('post', post)
+            create_or_get_upvote = Vote.objects.get_or_create(
+            voter=request.user,
+            comment=comment,
+            vote_type=1
+            )
+            if not create_or_get_upvote[1]:
+                vote = Vote.objects.get(id=create_or_get_upvote[0].id)
+                vote.delete()
+        elif downvotes:
+            comment = Comments.objects.get(pk=downvotes)            
+            check_upvote = Vote.objects.filter(
+                voter=request.user,
+                comment=comment,
+                vote_type=1
+            )
+            if check_upvote:
+                # change to downvote
+                the_upvote = Vote.objects.get(
+                voter=request.user,
+                comment=comment,
+                vote_type=1
+                )
+                the_upvote.vote_type = 0
+                the_upvote.save()
+                return redirect('post', post)
+            create_or_get_downvote = Vote.objects.get_or_create(
+            voter=request.user,
+            comment=comment,
+            vote_type=0
+            )
+            if not create_or_get_downvote[1]:
+                vote = Vote.objects.get(id=create_or_get_downvote[0].id)
+                vote.delete()
+    return redirect('post', post)
 
 
+@login_required
 def topic_page(request, id):
     topic = Topic.objects.get(id=id)
     posts = Posts.objects.filter(topic=topic)
@@ -112,7 +173,7 @@ def topic_page(request, id):
     return render(request, 'topic.html', context)
 
 
-
+@login_required
 def search_results(request):
     qs_inst = Instructors.objects.all()
     qs_post = Posts.objects.all()
