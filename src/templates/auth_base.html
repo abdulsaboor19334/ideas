@@ -1,0 +1,39 @@
+{% extends "abstract_base.html" %}
+
+
+
+{% block content %}
+<!-- <div class="m-2" style="position: absolute; left: 0px; top: 0px">
+  <a class="navbar-brand text-white" href="{% url 'front' %}">Ideas@IBA
+    <span style="font-weight: 300; font-size: 16px">
+        The unofficial IBA think tank
+    </span>
+    <span class="badge text-light" style="font-weight: 300; font-size: 12px">
+        Only for students
+    </span>
+</a>
+</div> -->
+<div class="d-flex justify-content-center align-items-center" style="background: url(https://i0.wp.com/academiamag.com/wp-content/uploads/2018/07/IBA-33.png?fit=1920%2C1280&ssl=1); height: 100vh; background-size: cover; background-position: 80%;">
+  <div class="card text-center m-5 iround shadow border-0" style="width: 350px; background-color: rgba(255,255,255,0.6)">
+    <div class="bg-danger border-0 iround-top p-3 shadow">
+      <a class="navbar-brand text-white" href="{% url 'front' %}">
+        Ideas@IBA
+         <br>
+        <span style="font-weight: 300; font-size: 16px">
+            The unofficial IBA think tank
+        </span>
+        <span class="badge text-white" style="font-weight: 300; font-size: 12px">
+            Only for students
+        </span>
+    </a>
+    </div>
+    <div class=" p-3">
+      {% block auth %}
+      {% endblock auth %}
+    
+    </div>
+    
+  </div>
+</div>
+
+{% endblock %}

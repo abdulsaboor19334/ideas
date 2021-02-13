@@ -4,17 +4,24 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DEBUG=True
+SECRET_KEY='sm&=ke9&$5m7zw^moqmm$i%e3o03x&4#f%9v=1bf8+_m=_g3qj'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_USE_TLS=True
+EMAIL_PORT=587
+EMAIL_HOST_USER='fluffcoding@gmail.com'
+EMAIL_HOST_PASSWORD='PandaSaboor'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'sm&=ke9&$5m7zw^moqmm$i%e3o03x&4#f%9v=1bf8+_m=_g3qj'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -33,14 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
     'allauth',
-    'allauth.account',
+    'account',
     'allauth.socialaccount',
    
     
     # Own
     'pages',
-    'instructors',
-    'users'
+    'instructors'
 
 ]
 
@@ -80,8 +86,12 @@ WSGI_APPLICATION = 'ideasatiba.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django',
+        'User':'django',
+        'Password':'caca63417c44b24853874096ff69de66',
+        'HOST': '165.22.210.169',
+        'PORT': '5432', 
     }
 }
 
@@ -140,9 +150,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
-ACCOUNT_EMAIL_VERIFICATION = "none"
-AUTH_USER_MODEL = 'users.User'
-SITE_ID = 1
+
+
+SITE_ID = 2
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email' 
 ACCOUNT_EMAIL_REQUIRED = True
@@ -150,10 +160,10 @@ ACCOUNT_EMAIL_REQUIRED = True
 # Make email verification mandatory to avoid junk email accounts
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
-#  Email Host
 
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "fluffcoding@gmail.com"
-EMAIL_HOST_PASSWORD = "PandaSaboor"
+EMAIL_SUBJECT_PREFIX = "Ideas at IBA"
+
+ACCOUNT_ADAPTER='users.adapters.RestrictEmailAdapter'
+
+
+LOGIN_REDIRECT_URL = '/'
