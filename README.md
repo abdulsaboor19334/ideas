@@ -1,0 +1,2 @@
+# ideas
+have fun
